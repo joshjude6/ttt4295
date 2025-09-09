@@ -63,24 +63,6 @@ def analyze_harmonics(filename, threshold=0.1, n_fft=16384, fmin=20.0, plot=Fals
         else:
             groupB.append({"frequency": f, "magnitude": mag[idx]}) # if not close enough, add to group B
 
-    if plot:
-        plt.figure(figsize=(10, 4))
-        plt.plot(freqs, mag, label="FFT spectrum")
-        plt.scatter([p["frequency"] for p in groupA],
-                    [p["magnitude"] for p in groupA],
-                    label="Group A (harmonic)", s=30)
-        plt.scatter([p["frequency"] for p in groupB],
-                    [p["magnitude"] for p in groupB],
-                    label="Group B (non-harmonic)", s=20)
-        plt.axvline(f0, linestyle="--", label=f"f0 ≈ {f0:.2f} Hz")
-        plt.xlabel("Frequency (Hz)")
-        plt.ylabel("Magnitude")
-        plt.title(f"Harmonic grouping - {os.path.basename(filename)}")
-        plt.xlim(0, max(2000, 5 * f0))
-        plt.legend()
-        plt.tight_layout()
-        plt.show()
-
     return {
         "f0": f0,
         "tolerance_hz": tolerance_hz,
