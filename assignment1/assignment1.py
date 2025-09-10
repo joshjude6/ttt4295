@@ -1,5 +1,5 @@
 ## Code for Assignment 1 in TTT4295, autumn 2025
-## Written by Josh Jude
+## Josh Jude
 
 import numpy as np
 import matplotlib.pyplot as plt
@@ -10,7 +10,6 @@ import glob
 
 def analyze_harmonics(filename, threshold=0.1, n_fft=16384, fmin=20.0, plot=False):
     rate, data = wavfile.read(filename)
-    data = data[:, 0]
     n = len(data)
 
     if n < n_fft:
@@ -181,18 +180,17 @@ def create_summary_table(files, output_file="summary_table.txt", **kwargs):
 
 
 if __name__ == "__main__":
-    files = "/Users/joshjude/Documents/Git/ttt4295/assignment1/music_box_tones/*.wav"
+    files = "/Users/joshjude/Documents/Git/ttt4295/assignment1/music_box_tones_k/*.wav"
     process_multiple_files(
         files,
-        output_file="/assignment1/detailed_harmonic_analysis.txt",
+        output_file="detailed_harmonic_analysis.txt",
         threshold=0.2,
-        n_fft=65536,
-        plot=False
+        n_fft=65536
     )
     
     create_summary_table(
         files,
-        output_file="/assignment1/summary_table.txt",
+        output_file="summary_table.txt",
         threshold=0.2,
         n_fft=65536
     )

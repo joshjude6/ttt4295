@@ -59,8 +59,8 @@ def plot_spectrum(filename, file_number, n_fft=16384):
     plt.show()
 
 def analyze_file(file_number):
-    filename = f"/Users/joshjude/Documents/Git/ttt4295/assignment1/music_box_tones/tone_music_box_full_audio_{file_number:03d}.wav"
+    filename = f"/Users/joshjude/Documents/Git/ttt4295/assignment1/music_box_tones_k/pink-panther_{file_number:03d}.wav"
     plot_waveform(filename, file_number)
     plot_spectrum(filename, file_number)
 
-analyze_file(29)
+analyze_file(39)
