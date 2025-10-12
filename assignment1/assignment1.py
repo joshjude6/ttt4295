@@ -8,7 +8,7 @@ from scipy.io import wavfile
 import os
 import glob
 
-def analyze_harmonics(filename, threshold=0.1, n_fft=16384, fmin=20.0, plot=False):
+def analyze_harmonics(filename, threshold=0.1, n_fft=65536, fmin=20.0, plot=False):
     rate, data = wavfile.read(filename)
     n = len(data)
 
@@ -29,8 +29,10 @@ def analyze_harmonics(filename, threshold=0.1, n_fft=16384, fmin=20.0, plot=Fals
     strong_sorted = sorted(strong, key=lambda i: freqs[i]) # sorting by frequency
     strong_sorted = [i for i in strong_sorted if freqs[i] >= fmin] # discarding weaker peaks
 
-    f0 = freqs[strong_sorted[0]] # fundamental frequency is the lowest freq peak
-    mag0 = mag[strong_sorted[0]] # magnitude of fundamental peak
+
+    max_peak_idx = max(strong_sorted, key=lambda i: mag[i])
+    f0 = freqs[max_peak_idx] # fundamental frequency is the largest magnitude peak
+    mag0 = mag[max_peak_idx] # magnitude of fundamental peak
 
     tolerance_hz = rate/n_fft # the bin wdith
 
@@ -184,13 +186,13 @@ if __name__ == "__main__":
     process_multiple_files(
         files,
         output_file="detailed_harmonic_analysis.txt",
-        threshold=0.2,
+        threshold=0.1,
         n_fft=65536
     )
     
     create_summary_table(
         files,
         output_file="summary_table.txt",
-        threshold=0.2,
+        threshold=0.1,
         n_fft=65536
     )
