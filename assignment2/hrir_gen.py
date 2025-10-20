@@ -28,7 +28,7 @@ def hrir_gen(inc_angle, h_radius, fs, c_air):
 
     return h_left, h_right
 
-'''
+
 fs = 44100
 c_air = 343
 h_radius = 0.09
@@ -50,6 +50,7 @@ for i, ang in enumerate(angles):
     axs[i, 0].set_title(f"Left Ear HRIR ({ang}°)")
     axs[i, 0].grid(True)
     axs[i, 0].set_ylabel("Amplitude")
+    axs[i, 0].set_xlim(0, 15)  # zoom in to first 100 samples
 
     # --- Left ear magnitude (HRTF) ---
     w, H_L = freqz(BL, AL, fs=fs)
@@ -61,6 +62,7 @@ for i, ang in enumerate(angles):
     axs[i, 2].plot(nR, hR, color='tab:blue')
     axs[i, 2].set_title(f"Right Ear HRIR ({ang}°)")
     axs[i, 2].grid(True)
+    axs[i, 2].set_xlim(0, 15)  # zoom in to first 100 samples
 
     # --- Right ear magnitude (HRTF) ---
     w, H_R = freqz(BR, AR, fs=fs)
@@ -79,4 +81,3 @@ for j in [1, 3]:
 plt.suptitle("Task 4: Complete HRIR simulator", fontsize=15, y=0.99)
 plt.tight_layout()
 plt.show()
-'''

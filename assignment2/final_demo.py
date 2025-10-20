@@ -68,14 +68,11 @@ def task5_demo():
     ax2.set_title('Right ear')
     ax2.grid(True)
     
-    fig.suptitle('Task 5 – Moving sound demo')
     plt.tight_layout()
     plt.show()
 
-    if play_demo:
-        print("playing demo - listen with headphones...")
-        sd.play(stereo, fs)
-        sd.wait()
+    sd.play(stereo, fs)
+    sd.wait()
 
     return stereo
 
